@@ -11,4 +11,4 @@ const orphan=structuredClone(s);orphan.routes=orphan.routes.slice(0,1);orphan.eq
 const short=structuredClone(s);short.routes[0].len=.05;assert(N.drawingErrors(short,N.calculate(short)).length>0);
 const mismatch=structuredClone(s);mismatch.routes[0].pipe='40A';assert(N.drawingErrors(mismatch,N.calculate(mismatch)).length>0);
 const badValve=structuredClone(s);badValve.routes[0].pipe='40A';delete badValve.joints[1];assert(N.drawingErrors(badValve,N.calculate(badValve)).some(x=>x.includes('50A')));
-require('fs').writeFileSync(process.env.TEMP+'/piping_catalog_test.dxf',N.dxf(s,['top','front','side']));console.log('部品寸法、エルボ端面・直管控除、配置チェック、DXF: OK');
+require('fs').writeFileSync(require('os').tmpdir()+'/piping_catalog_test.dxf',N.dxf(s,['top','front','side']));console.log('部品寸法、エルボ端面・直管控除、配置チェック、DXF: OK');

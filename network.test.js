@@ -15,5 +15,5 @@ const original=structuredClone(C.defaults),converted=N.fromLegacy(original),lega
 const manual=structuredClone(C.defaults);manual.headMode='manual';manual.staticHead=1.25;manual.pressure=30;const old=C.calculate(manual),newer=N.calculate(N.fromLegacy(manual));close(newer.design,old.design,1e-8);close(newer.power,old.power,1e-8);
 for(const view of ['iso','top','front','side'])assert(N.drawing(s,view,r).length>0);assert.deepEqual(N.drawingErrors(s,r),[]);
 const oversized=structuredClone(s);oversized.routes[0].parts[0].bodyLength=99999;assert(N.drawingErrors(oversized,N.calculate(oversized)).length);
-require('fs').writeFileSync(process.env.TEMP+'/pipe_network_three_views.dxf',N.dxf(s,['top','front','side']));
+require('fs').writeFileSync(require('os').tmpdir()+'/pipe_network_three_views.dxf',N.dxf(s,['top','front','side']));
 console.log('分岐の流量保存、区間径、経路損失、支配経路、圧力、旧版移行、重複、DXF: OK');

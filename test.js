@@ -14,5 +14,5 @@ assert.equal(body.length,4); assert(lengths.some(x=>Math.abs(x-178)<1e-8));asser
 s.parts[0].bodyLength=20000; assert(c.drawingErrors(s,c.calculate(s)).some(x=>x.includes('はみ出')));
 assert.throws(()=>c.dxf(s,['top']));
 s.parts[0].bodyLength=178; for(const v of ['top','front','side','iso']) assert(c.drawing(s,v,c.calculate(s)).length>0);
-require('fs').writeFileSync(process.env.TEMP+'/pipe_views_verified.dxf',c.dxf(s,['top','front','side']));
+require('fs').writeFileSync(require('os').tmpdir()+'/pipe_views_verified.dxf',c.dxf(s,['top','front','side']));
 console.log('計算、SGP外径、部品寸法、図面チェック: OK');
