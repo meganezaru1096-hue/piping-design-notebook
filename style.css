@@ -22,3 +22,5 @@
 .part-hit{fill:transparent;stroke:transparent;stroke-width:8;pointer-events:all;cursor:pointer}.part-hit:focus-visible{fill:#e9a64e66;stroke:#bc6a1e}
 
 #circIndex button[aria-current="true"]{border-color:#b55721;background:#fff1e8;color:#81320f}
+
+.cost-table input[type="number"]{min-width:7em;width:100%;box-sizing:border-box}.cost-extra{margin:10px 0}.cost-table td{vertical-align:middle}
