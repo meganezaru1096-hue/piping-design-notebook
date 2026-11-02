@@ -1,0 +1,12 @@
+'use strict';
+const assert=require('assert'), fs=require('fs');
+const {jwcad}=require('./dxf-encoding.js');
+const src=fs.readFileSync('サンプル/図面_流れ方向/流れ方向_アイソメ.dxf','utf8');
+const data=jwcad(src), text=new TextDecoder('shift_jis',{fatal:true}).decode(data);
+assert(text.includes('AC1015\r\n9\r\n$DWGCODEPAGE\r\n3\r\nANSI_932'));
+assert(text.includes('設備'));assert(text.includes('戻り'));assert(text.includes('m3/min'));
+assert(text.includes('R1→R0'));assert(!text.includes('m³/min'));
+assert.throws(()=>jwcad(src+'設備🧪'),/表せない文字/);
+assert.throws(()=>jwcad('not a dxf'),/ヘッダー/);
+const N=require('./network'),L=require('./circulation');for(const [engine,state] of [[N,N.defaults],[L,L.defaults]])for(const views of [['iso'],['top','front','side']]){const decoded=new TextDecoder('shift_jis',{fatal:true}).decode(jwcad(engine.dxf(state,views)));assert(decoded.includes('設備'));assert(decoded.includes('AC1015'));}assert(new TextDecoder('shift_jis').decode(jwcad(N.dxf(N.defaults,['iso']))).includes('右上'));
+console.log('Jw_cad DXF文字コードの検証: OK');

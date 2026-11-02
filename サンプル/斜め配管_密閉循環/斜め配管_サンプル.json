@@ -1,0 +1,224 @@
+{
+  "format": "piping-closed-circulation",
+  "version": 1,
+  "data": {
+    "maxVelocity": 2,
+    "density": 998.2,
+    "viscosity": 1.004,
+    "roughness": 0.045,
+    "efficiency": 70,
+    "margin": 10,
+    "commonPressureDrop": 20,
+    "supply": {
+      "origin": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "routes": [
+        {
+          "id": 1,
+          "parent": 0,
+          "direction": "east",
+          "len": 6,
+          "pipe": "100A",
+          "parts": [
+            {
+              "type": "gate",
+              "position": 50,
+              "count": 1,
+              "k": 0.2,
+              "kRef": "評価用の仮値・実製品と流路別のK値を要確認"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "parent": 1,
+          "direction": "diagonal",
+          "len": 3.3166247903554,
+          "pipe": "100A",
+          "parts": [
+            {
+              "type": "tee",
+              "position": 50,
+              "count": 1,
+              "k": 0.3,
+              "kRef": "評価用の仮値・実製品と流路別のK値を要確認",
+              "jointId": 1
+            },
+            {
+              "type": "gate",
+              "position": 50,
+              "count": 1,
+              "k": 0.2,
+              "kRef": "評価用の仮値・実製品と流路別のK値を要確認"
+            }
+          ],
+          "dx": 3,
+          "dy": 1,
+          "dz": 1
+        },
+        {
+          "id": 3,
+          "parent": 1,
+          "direction": "north",
+          "len": 4,
+          "pipe": "100A",
+          "parts": [
+            {
+              "type": "tee",
+              "position": 50,
+              "count": 1,
+              "k": 1,
+              "kRef": "評価用の仮値・実製品と流路別のK値を要確認",
+              "jointId": 1
+            },
+            {
+              "type": "gate",
+              "position": 50,
+              "count": 1,
+              "k": 0.2,
+              "kRef": "評価用の仮値・実製品と流路別のK値を要確認"
+            }
+          ]
+        }
+      ],
+      "joints": {}
+    },
+    "return": {
+      "origin": {
+        "x": 0,
+        "y": -1,
+        "z": 0
+      },
+      "routes": [
+        {
+          "id": 1,
+          "parent": 0,
+          "direction": "east",
+          "len": 12,
+          "pipe": "100A",
+          "parts": [
+            {
+              "type": "check",
+              "position": 50,
+              "count": 1,
+              "k": 2,
+              "kRef": "評価用の仮値・実製品と流路別のK値を要確認"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "parent": 1,
+          "direction": "north",
+          "len": 1,
+          "pipe": "100A",
+          "parts": [
+            {
+              "type": "elbow",
+              "position": 50,
+              "count": 1,
+              "k": 0.9,
+              "kRef": "評価用の仮値・実製品と流路別のK値を要確認",
+              "jointId": 1
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "parent": 2,
+          "direction": "diagonal",
+          "len": 1.4142135623730951,
+          "pipe": "100A",
+          "parts": [
+            {
+              "type": "tee",
+              "position": 50,
+              "count": 1,
+              "k": 1,
+              "kRef": "評価用の仮値・実製品と流路別のK値を要確認",
+              "jointId": 2
+            }
+          ],
+          "dx": -1,
+          "dy": 0,
+          "dz": 1
+        },
+        {
+          "id": 4,
+          "parent": 2,
+          "direction": "north",
+          "len": 4,
+          "pipe": "100A",
+          "parts": [
+            {
+              "type": "tee",
+              "position": 50,
+              "count": 1,
+              "k": 0.3,
+              "kRef": "評価用の仮値・実製品と流路別のK値を要確認",
+              "jointId": 2
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "parent": 4,
+          "direction": "west",
+          "len": 5,
+          "pipe": "100A",
+          "parts": [
+            {
+              "type": "elbow",
+              "position": 50,
+              "count": 1,
+              "k": 0.9,
+              "kRef": "評価用の仮値・実製品と流路別のK値を要確認",
+              "jointId": 4
+            }
+          ]
+        }
+      ],
+      "joints": {
+        "1": {
+          "type": "elbow",
+          "catalog": "benkan_90_lr",
+          "reference": "評価用・ベンカン溶接式継手寸法表（実製品要照合）",
+          "ports": {
+            "1": "100A",
+            "2": "100A"
+          }
+        },
+        "4": {
+          "type": "elbow",
+          "catalog": "benkan_90_lr",
+          "reference": "評価用・ベンカン溶接式継手寸法表（実製品要照合）",
+          "ports": {
+            "4": "100A",
+            "5": "100A"
+          }
+        }
+      }
+    },
+    "equipment": [
+      {
+        "id": 1,
+        "name": "設備 A",
+        "supplyNode": 2,
+        "returnNode": 3,
+        "flow": 0.12,
+        "pressureDrop": 30
+      },
+      {
+        "id": 2,
+        "name": "設備 B",
+        "supplyNode": 3,
+        "returnNode": 5,
+        "flow": 0.08,
+        "pressureDrop": 45
+      }
+    ]
+  }
+}

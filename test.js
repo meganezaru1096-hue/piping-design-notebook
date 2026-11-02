@@ -1,0 +1,18 @@
+const assert = require('node:assert/strict');
+const c = require('./core');
+const s = structuredClone(c.defaults), r = c.calculate(s);
+assert.equal(r.name, '50A'); assert.equal(r.outerDiameter, 60.5);
+assert.equal(r.l, 17); assert(Math.abs(r.design - 5.232657) < 0.00001);
+assert.deepEqual(c.drawingErrors(s,r), []);
+s.parts[0].bodyLength = 178; s.parts[0].bodyWidth = 165;
+const objects = c.drawing(s,'top',c.calculate(s));
+const lines = objects.filter(x=>x.kind==='line' && x.layer==='PIPE_OUTLINE' && Math.abs(x.a[1]-x.b[1])<1e-8);
+assert(lines.some(x=>Math.abs(x.a[1]-30.25)<1e-8)); assert(lines.some(x=>Math.abs(x.a[1]+30.25)<1e-8));
+const body=objects.filter(x=>x.kind==='line'&&x.layer==='FITTINGS');
+const lengths=body.map(x=>Math.hypot(x.a[0]-x.b[0], x.a[1]-x.b[1]));
+assert.equal(body.length,4); assert(lengths.some(x=>Math.abs(x-178)<1e-8));assert(lengths.some(x=>Math.abs(x-165)<1e-8));
+s.parts[0].bodyLength=20000; assert(c.drawingErrors(s,c.calculate(s)).some(x=>x.includes('はみ出')));
+assert.throws(()=>c.dxf(s,['top']));
+s.parts[0].bodyLength=178; for(const v of ['top','front','side','iso']) assert(c.drawing(s,v,c.calculate(s)).length>0);
+require('fs').writeFileSync(process.env.TEMP+'/pipe_views_verified.dxf',c.dxf(s,['top','front','side']));
+console.log('計算、SGP外径、部品寸法、図面チェック: OK');

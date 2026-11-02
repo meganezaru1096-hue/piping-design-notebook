@@ -1,0 +1,490 @@
+{
+  "format": "piping-design-notebook",
+  "version": 4,
+  "data": {
+    "maxVelocity": 2,
+    "density": 998.2,
+    "viscosity": 1.004,
+    "roughness": 0.045,
+    "efficiency": 70,
+    "margin": 10,
+    "sourceZ": 0,
+    "sourcePressure": 0,
+    "origin": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "routes": [
+      {
+        "id": 1,
+        "parent": 0,
+        "direction": "east",
+        "len": 8,
+        "pipe": "100A",
+        "parts": [
+          {
+            "type": "gate",
+            "catalog": "kitz_10fcl_100",
+            "position": 50,
+            "count": 1,
+            "k": 0.2,
+            "kRef": "",
+            "stemDirection": "up",
+            "mating": "jis10k_sop_ff",
+            "gasketThickness": 3
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "parent": 1,
+        "direction": "east",
+        "len": 6,
+        "pipe": "100A",
+        "parts": [
+          {
+            "type": "tee",
+            "position": 10,
+            "count": 1,
+            "k": 0.3,
+            "kRef": "",
+            "jointId": 1
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "parent": 1,
+        "direction": "north",
+        "len": 1,
+        "pipe": "100A",
+        "parts": [
+          {
+            "type": "tee",
+            "position": 10,
+            "count": 1,
+            "k": 1,
+            "kRef": "",
+            "jointId": 1
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "parent": 3,
+        "direction": "north",
+        "len": 3,
+        "pipe": "50A",
+        "parts": [
+          {
+            "type": "reducer",
+            "position": 10,
+            "count": 1,
+            "k": 0.5,
+            "kRef": "",
+            "jointId": 3
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "parent": 4,
+        "direction": "up",
+        "len": 2,
+        "pipe": "50A",
+        "parts": [
+          {
+            "type": "elbow",
+            "position": 10,
+            "count": 1,
+            "k": 0.9,
+            "kRef": "",
+            "jointId": 4
+          },
+          {
+            "type": "gate",
+            "catalog": "kitz_10fcl_50",
+            "position": 50,
+            "count": 1,
+            "k": 0.2,
+            "kRef": "",
+            "stemDirection": "east",
+            "mating": "jis10k_sop_ff",
+            "gasketThickness": 3
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "parent": 5,
+        "direction": "east",
+        "len": 4,
+        "pipe": "50A",
+        "parts": [
+          {
+            "type": "elbow",
+            "position": 10,
+            "count": 1,
+            "k": 0.9,
+            "kRef": "",
+            "jointId": 5
+          },
+          {
+            "type": "ball",
+            "position": 65,
+            "count": 1,
+            "k": 0.1,
+            "kRef": "",
+            "bodyLength": 130,
+            "bodyWidth": 90
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "parent": 2,
+        "direction": "east",
+        "len": 4,
+        "pipe": "100A",
+        "parts": [
+          {
+            "type": "tee",
+            "position": 10,
+            "count": 1,
+            "k": 0.3,
+            "kRef": "",
+            "jointId": 2
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "parent": 2,
+        "direction": "south",
+        "len": 1,
+        "pipe": "100A",
+        "parts": [
+          {
+            "type": "tee",
+            "position": 10,
+            "count": 1,
+            "k": 1,
+            "kRef": "",
+            "jointId": 2
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "parent": 8,
+        "direction": "south",
+        "len": 3,
+        "pipe": "65A",
+        "parts": [
+          {
+            "type": "reducer",
+            "position": 10,
+            "count": 1,
+            "k": 0.5,
+            "kRef": "",
+            "jointId": 8
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "parent": 9,
+        "direction": "up",
+        "len": 3,
+        "pipe": "65A",
+        "parts": [
+          {
+            "type": "elbow",
+            "position": 10,
+            "count": 1,
+            "k": 0.9,
+            "kRef": "",
+            "jointId": 9
+          },
+          {
+            "type": "gate",
+            "catalog": "kitz_10fcl_65",
+            "position": 50,
+            "count": 1,
+            "k": 0.2,
+            "kRef": "",
+            "stemDirection": "north",
+            "mating": "jis10k_sop_ff",
+            "gasketThickness": 3
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "parent": 10,
+        "direction": "west",
+        "len": 3,
+        "pipe": "65A",
+        "parts": [
+          {
+            "type": "elbow",
+            "position": 10,
+            "count": 1,
+            "k": 0.9,
+            "kRef": "",
+            "jointId": 10
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "parent": 7,
+        "direction": "east",
+        "len": 3,
+        "pipe": "100A",
+        "parts": [
+          {
+            "type": "tee",
+            "position": 10,
+            "count": 1,
+            "k": 0.3,
+            "kRef": "",
+            "jointId": 7
+          },
+          {
+            "type": "check",
+            "position": 55,
+            "count": 1,
+            "k": 2,
+            "kRef": "",
+            "bodyLength": 250,
+            "bodyWidth": 220
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "parent": 7,
+        "direction": "north",
+        "len": 1,
+        "pipe": "100A",
+        "parts": [
+          {
+            "type": "tee",
+            "position": 10,
+            "count": 1,
+            "k": 1,
+            "kRef": "",
+            "jointId": 7
+          }
+        ]
+      },
+      {
+        "id": 14,
+        "parent": 13,
+        "direction": "north",
+        "len": 3,
+        "pipe": "80A",
+        "parts": [
+          {
+            "type": "reducer",
+            "position": 10,
+            "count": 1,
+            "k": 0.5,
+            "kRef": "",
+            "jointId": 13
+          }
+        ]
+      },
+      {
+        "id": 15,
+        "parent": 14,
+        "direction": "up",
+        "len": 2,
+        "pipe": "80A",
+        "parts": [
+          {
+            "type": "elbow",
+            "position": 10,
+            "count": 1,
+            "k": 0.9,
+            "kRef": "",
+            "jointId": 14
+          },
+          {
+            "type": "gate",
+            "catalog": "kitz_10fcl_80",
+            "position": 50,
+            "count": 1,
+            "k": 0.2,
+            "kRef": "",
+            "stemDirection": "west",
+            "mating": "jis10k_sop_ff",
+            "gasketThickness": 3
+          }
+        ]
+      },
+      {
+        "id": 16,
+        "parent": 15,
+        "direction": "east",
+        "len": 3,
+        "pipe": "80A",
+        "parts": [
+          {
+            "type": "elbow",
+            "position": 10,
+            "count": 1,
+            "k": 0.9,
+            "kRef": "",
+            "jointId": 15
+          }
+        ]
+      }
+    ],
+    "equipment": [
+      {
+        "id": 1,
+        "name": "設備 A",
+        "node": 6,
+        "flow": 0.08,
+        "pressure": 20
+      },
+      {
+        "id": 2,
+        "name": "設備 B",
+        "node": 12,
+        "flow": 0.12,
+        "pressure": 50
+      },
+      {
+        "id": 3,
+        "name": "設備 C",
+        "node": 11,
+        "flow": 0.1,
+        "pressure": 80
+      },
+      {
+        "id": 4,
+        "name": "設備 D",
+        "node": 16,
+        "flow": 0.1,
+        "pressure": 35
+      }
+    ],
+    "joints": {
+      "1": {
+        "catalog": "benkan_tee",
+        "type": "tee",
+        "reference": "ベンカン FSGP 寸法表（サンプル）",
+        "ports": {
+          "1": "100A",
+          "2": "100A",
+          "3": "100A"
+        }
+      },
+      "2": {
+        "catalog": "benkan_tee",
+        "type": "tee",
+        "reference": "ベンカン FSGP 寸法表（サンプル）",
+        "ports": {
+          "2": "100A",
+          "7": "100A",
+          "8": "100A"
+        }
+      },
+      "3": {
+        "catalog": "benkan_reducer",
+        "type": "reducer",
+        "reference": "ベンカン FSGP 寸法表（サンプル）",
+        "ports": {
+          "3": "100A",
+          "4": "50A"
+        }
+      },
+      "4": {
+        "catalog": "benkan_90_lr",
+        "type": "elbow",
+        "reference": "ベンカン FSGP 寸法表（サンプル）",
+        "ports": {
+          "4": "50A",
+          "5": "50A"
+        }
+      },
+      "5": {
+        "catalog": "benkan_90_lr",
+        "type": "elbow",
+        "reference": "ベンカン FSGP 寸法表（サンプル）",
+        "ports": {
+          "5": "50A",
+          "6": "50A"
+        }
+      },
+      "7": {
+        "catalog": "benkan_tee",
+        "type": "tee",
+        "reference": "ベンカン FSGP 寸法表（サンプル）",
+        "ports": {
+          "7": "100A",
+          "12": "100A",
+          "13": "100A"
+        }
+      },
+      "8": {
+        "catalog": "benkan_reducer",
+        "type": "reducer",
+        "reference": "ベンカン FSGP 寸法表（サンプル）",
+        "ports": {
+          "8": "100A",
+          "9": "65A"
+        }
+      },
+      "9": {
+        "catalog": "benkan_90_lr",
+        "type": "elbow",
+        "reference": "ベンカン FSGP 寸法表（サンプル）",
+        "ports": {
+          "9": "65A",
+          "10": "65A"
+        }
+      },
+      "10": {
+        "catalog": "benkan_90_lr",
+        "type": "elbow",
+        "reference": "ベンカン FSGP 寸法表（サンプル）",
+        "ports": {
+          "10": "65A",
+          "11": "65A"
+        }
+      },
+      "13": {
+        "catalog": "benkan_reducer",
+        "type": "reducer",
+        "reference": "ベンカン FSGP 寸法表（サンプル）",
+        "ports": {
+          "13": "100A",
+          "14": "80A"
+        }
+      },
+      "14": {
+        "catalog": "benkan_90_lr",
+        "type": "elbow",
+        "reference": "ベンカン FSGP 寸法表（サンプル）",
+        "ports": {
+          "14": "80A",
+          "15": "80A"
+        }
+      },
+      "15": {
+        "catalog": "benkan_90_lr",
+        "type": "elbow",
+        "reference": "ベンカン FSGP 寸法表（サンプル）",
+        "ports": {
+          "15": "80A",
+          "16": "80A"
+        }
+      }
+    }
+  }
+}

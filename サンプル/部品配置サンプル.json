@@ -1,0 +1,90 @@
+{
+  "format": "piping-design-notebook",
+  "version": 4,
+  "data": {
+    "maxVelocity": 2,
+    "density": 998.2,
+    "viscosity": 1.004,
+    "roughness": 0.045,
+    "efficiency": 70,
+    "margin": 10,
+    "sourcePressure": 0,
+    "sourceZ": 0,
+    "origin": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "routes": [
+      {
+        "id": 1,
+        "parent": 0,
+        "direction": "east",
+        "len": 8,
+        "pipe": "auto",
+        "parts": [
+          {
+            "type": "gate",
+            "position": 50,
+            "count": 1,
+            "k": 0.2,
+            "bodyLength": null,
+            "bodyWidth": null,
+            "catalog": "kitz_10fcl_50"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "parent": 1,
+        "direction": "north",
+        "len": 5,
+        "pipe": "auto",
+        "parts": [
+          {
+            "type": "elbow",
+            "position": 10,
+            "count": 1,
+            "k": 0.9,
+            "bodyLength": null,
+            "bodyWidth": null
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "parent": 2,
+        "direction": "up",
+        "len": 4,
+        "pipe": "auto",
+        "parts": [
+          {
+            "type": "elbow",
+            "position": 10,
+            "count": 1,
+            "k": 0.9,
+            "bodyLength": null,
+            "bodyWidth": null
+          }
+        ]
+      }
+    ],
+    "equipment": [
+      {
+        "id": 1,
+        "name": "設備 1",
+        "node": 3,
+        "flow": 0.16666666666666666,
+        "pressure": 0
+      }
+    ],
+    "joints": {
+      "1": {
+        "catalog": "benkan_90_lr"
+      },
+      "2": {
+        "catalog": "benkan_90_lr"
+      }
+    }
+  }
+}

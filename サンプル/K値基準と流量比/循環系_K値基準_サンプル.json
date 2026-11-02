@@ -1,0 +1,352 @@
+{
+  "format": "piping-closed-circulation",
+  "version": 1,
+  "data": {
+    "maxVelocity": 2,
+    "density": 998.2,
+    "viscosity": 1.004,
+    "roughness": 0.045,
+    "efficiency": 70,
+    "margin": 10,
+    "commonPressureDrop": 0,
+    "supply": {
+      "origin": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "routes": [
+        {
+          "id": 1,
+          "parent": 0,
+          "direction": "east",
+          "len": 6,
+          "pipe": "100A",
+          "parts": [
+            {
+              "type": "gate",
+              "position": 50,
+              "count": 1,
+              "k": 0.2,
+              "kRef": "評価用の仮値・実製品と流路別のK値を要確認"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "parent": 1,
+          "direction": "east",
+          "len": 4,
+          "pipe": "100A",
+          "parts": [
+            {
+              "type": "tee",
+              "position": 50,
+              "count": 1,
+              "k": 0.3,
+              "kRef": "評価用仮値：実機K値・流量比で要照合",
+              "jointId": 1,
+              "kBasis": "connected",
+              "kRefRouteId": 1,
+              "kFlowMode": "dividing",
+              "kPath": "run",
+              "kContext": null
+            },
+            {
+              "type": "gate",
+              "position": 50,
+              "count": 1,
+              "k": 0.2,
+              "kRef": "評価用の仮値・実製品と流路別のK値を要確認"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "parent": 1,
+          "direction": "north",
+          "len": 4,
+          "pipe": "100A",
+          "parts": [
+            {
+              "type": "tee",
+              "position": 50,
+              "count": 1,
+              "k": 1,
+              "kRef": "評価用仮値：実機K値・流量比で要照合",
+              "jointId": 1,
+              "kBasis": "connected",
+              "kRefRouteId": 1,
+              "kFlowMode": "dividing",
+              "kPath": "branch",
+              "kContext": null
+            },
+            {
+              "type": "gate",
+              "position": 50,
+              "count": 1,
+              "k": 0.2,
+              "kRef": "評価用の仮値・実製品と流路別のK値を要確認"
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "parent": 2,
+          "direction": "diagonal",
+          "dx": 1,
+          "dy": 1,
+          "dz": 0,
+          "len": 1.4142135623730951,
+          "pipe": "100A",
+          "parts": [
+            {
+              "type": "elbow",
+              "position": 20,
+              "count": 1,
+              "k": 0.4,
+              "kRef": "評価用の仮値・実製品と流路別のK値を要確認",
+              "jointId": 2
+            }
+          ]
+        }
+      ],
+      "joints": {
+        "1": {
+          "type": "tee",
+          "catalog": "benkan_tee",
+          "reference": "評価用・ベンカン溶接式継手寸法表（実製品要照合）",
+          "ports": {
+            "1": "100A",
+            "2": "100A",
+            "3": "100A"
+          }
+        },
+        "2": {
+          "type": "elbow",
+          "catalog": "benkan_45_lr",
+          "reference": "評価用・ベンカン溶接式継手寸法表（実製品要照合）",
+          "ports": {
+            "2": "100A",
+            "4": "100A"
+          }
+        }
+      }
+    },
+    "return": {
+      "origin": {
+        "x": 0,
+        "y": -1,
+        "z": 1
+      },
+      "routes": [
+        {
+          "id": 1,
+          "parent": 0,
+          "direction": "east",
+          "len": 12,
+          "pipe": "100A",
+          "parts": [
+            {
+              "type": "check",
+              "position": 50,
+              "count": 1,
+              "k": 2,
+              "kRef": "評価用の仮値・実製品と流路別のK値を要確認"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "parent": 1,
+          "direction": "north",
+          "len": 1,
+          "pipe": "100A",
+          "parts": [
+            {
+              "type": "elbow",
+              "position": 50,
+              "count": 1,
+              "k": 0.9,
+              "kRef": "評価用の仮値・実製品と流路別のK値を要確認",
+              "jointId": 1
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "parent": 2,
+          "direction": "west",
+          "len": 1,
+          "pipe": "100A",
+          "parts": [
+            {
+              "type": "tee",
+              "position": 50,
+              "count": 1,
+              "k": 1,
+              "kRef": "評価用仮値：実機K値・流量比で要照合",
+              "jointId": 2,
+              "kBasis": "connected",
+              "kRefRouteId": 2,
+              "kFlowMode": "combining",
+              "kPath": "branch",
+              "kContext": null
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "parent": 2,
+          "direction": "north",
+          "len": 4,
+          "pipe": "100A",
+          "parts": [
+            {
+              "type": "tee",
+              "position": 50,
+              "count": 1,
+              "k": 0.3,
+              "kRef": "評価用仮値：実機K値・流量比で要照合",
+              "jointId": 2,
+              "kBasis": "connected",
+              "kRefRouteId": 2,
+              "kFlowMode": "combining",
+              "kPath": "run",
+              "kContext": null
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "parent": 4,
+          "direction": "west",
+          "len": 5,
+          "pipe": "100A",
+          "parts": [
+            {
+              "type": "elbow",
+              "position": 50,
+              "count": 1,
+              "k": 0.9,
+              "kRef": "評価用の仮値・実製品と流路別のK値を要確認",
+              "jointId": 4
+            }
+          ]
+        }
+      ],
+      "joints": {
+        "1": {
+          "type": "elbow",
+          "catalog": "benkan_90_lr",
+          "reference": "評価用・ベンカン溶接式継手寸法表（実製品要照合）",
+          "ports": {
+            "1": "100A",
+            "2": "100A"
+          }
+        },
+        "2": {
+          "type": "tee",
+          "catalog": "benkan_tee",
+          "reference": "評価用・ベンカン溶接式継手寸法表（実製品要照合）",
+          "ports": {
+            "2": "100A",
+            "3": "100A",
+            "4": "100A"
+          }
+        },
+        "4": {
+          "type": "elbow",
+          "catalog": "benkan_90_lr",
+          "reference": "評価用・ベンカン溶接式継手寸法表（実製品要照合）",
+          "ports": {
+            "4": "100A",
+            "5": "100A"
+          }
+        }
+      }
+    },
+    "equipment": [
+      {
+        "id": 1,
+        "name": "設備 A",
+        "supplyNode": 4,
+        "returnNode": 3,
+        "flow": 0.12,
+        "pressureDrop": 30,
+        "pressureDropBasis": "total",
+        "balanceValve": {
+          "enabled": true,
+          "name": "BV-A",
+          "kvMax": 25,
+          "minimumPressureDrop": 3,
+          "reference": "評価用仮値・実機の弁特性は未確認",
+          "side": "return",
+          "routeId": 3,
+          "position": 70
+        }
+      },
+      {
+        "id": 2,
+        "name": "設備 B",
+        "supplyNode": 3,
+        "returnNode": 5,
+        "flow": 0.08,
+        "pressureDrop": 45,
+        "pressureDropBasis": "total",
+        "balanceValve": {
+          "enabled": true,
+          "name": "BV-B",
+          "kvMax": 25,
+          "minimumPressureDrop": 3,
+          "reference": "評価用仮値・実機の弁特性は未確認",
+          "side": "supply",
+          "routeId": 3,
+          "position": 75
+        }
+      }
+    ],
+    "insulationThickness": 25,
+    "minimumClearance": 30,
+    "commonDevices": [
+      {
+        "id": 1,
+        "name": "熱交換器 HX-1",
+        "side": "supply",
+        "routeId": 1,
+        "position": 20,
+        "pressureDrop": 12,
+        "referenceFlow": 0.2,
+        "reference": "評価用仮値・実機曲線と配置は未確認"
+      },
+      {
+        "id": 2,
+        "name": "ストレーナ ST-1",
+        "side": "return",
+        "routeId": 1,
+        "position": 75,
+        "pressureDrop": 8,
+        "referenceFlow": 0.2,
+        "reference": "評価用仮値・実機圧損と配置は未確認"
+      }
+    ],
+    "staticCheck": {
+      "anchorZ": 1,
+      "anchorGauge": 150,
+      "minimumGauge": 30,
+      "reference": "評価用仮値。停止・満水、実機の圧力設定は未確認。"
+    },
+    "npshCheck": {
+      "flow": 0.2,
+      "temperature": 20,
+      "atmosphere": 101.325,
+      "vapour": 2.339,
+      "suctionGauge": 100,
+      "velocity": 1,
+      "required": 3,
+      "margin": 1,
+      "reference": "評価用仮値。吸込圧とNPSHrは実機・運転範囲で要確認。"
+    },
+    "maxPressureGradient": 10
+  }
+}

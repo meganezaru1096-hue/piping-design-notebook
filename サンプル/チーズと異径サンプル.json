@@ -1,0 +1,107 @@
+{
+  "format": "piping-design-notebook",
+  "version": 4,
+  "data": {
+    "maxVelocity": 2,
+    "density": 998.2,
+    "viscosity": 1.004,
+    "roughness": 0.045,
+    "efficiency": 70,
+    "margin": 10,
+    "sourceZ": 0,
+    "sourcePressure": 0,
+    "origin": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "routes": [
+      {
+        "id": 1,
+        "parent": 0,
+        "direction": "east",
+        "len": 8,
+        "pipe": "50A",
+        "parts": []
+      },
+      {
+        "id": 2,
+        "parent": 1,
+        "direction": "north",
+        "len": 5,
+        "pipe": "32A",
+        "parts": []
+      },
+      {
+        "id": 3,
+        "parent": 1,
+        "direction": "east",
+        "len": 3,
+        "pipe": "50A",
+        "parts": []
+      },
+      {
+        "id": 4,
+        "parent": 3,
+        "direction": "east",
+        "len": 4,
+        "pipe": "40A",
+        "parts": []
+      },
+      {
+        "id": 5,
+        "parent": 4,
+        "direction": "up",
+        "len": 4,
+        "pipe": "40A",
+        "parts": []
+      }
+    ],
+    "equipment": [
+      {
+        "id": 1,
+        "name": "A",
+        "node": 2,
+        "flow": 0.1,
+        "pressure": 0
+      },
+      {
+        "id": 2,
+        "name": "B",
+        "node": 5,
+        "flow": 0.05,
+        "pressure": 0
+      }
+    ],
+    "joints": {
+      "1": {
+        "catalog": "benkan_tee",
+        "type": "tee",
+        "reference": "ベンカン FSGP 寸法表（サンプル）",
+        "ports": {
+          "1": "50A",
+          "2": "32A",
+          "3": "50A"
+        }
+      },
+      "3": {
+        "catalog": "benkan_reducer",
+        "type": "reducer",
+        "reference": "ベンカン FSGP 寸法表（サンプル）",
+        "ports": {
+          "3": "50A",
+          "4": "40A"
+        }
+      },
+      "4": {
+        "catalog": "benkan_90_lr",
+        "type": "elbow",
+        "reference": "ベンカン FSGP 寸法表（サンプル）",
+        "ports": {
+          "4": "40A",
+          "5": "40A"
+        }
+      }
+    }
+  }
+}

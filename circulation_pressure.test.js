@@ -1,0 +1,16 @@
+'use strict';
+const assert=require('assert/strict'),L=require('./circulation');
+const s=structuredClone(L.defaults),near=(x,y)=>assert(Math.abs(x-y)<1e-9,`${x} != ${y}`);
+s.supply.origin.z=10;s.return.origin.z=10;s.equipment.forEach(x=>x.pressureDropBasis='total');
+s.staticCheck={anchorZ:0,anchorGauge:200,minimumGauge:90,reference:'手計算'};
+s.npshCheck={flow:.2,temperature:20,atmosphere:101.325,vapour:2.339,suctionGauge:50,velocity:2,required:3,margin:1,reference:'手計算'};
+const r=L.calculate(s);assert.deepEqual(r.errors,[]);let p=L.pressureChecks(s,r);assert.deepEqual(p.static.errors,[]);near(p.static.highPressure,200-s.density*9.80665*10/1000);assert(p.static.adequate);near(p.npsh.available,(101.325+50-2.339)*1000/(s.density*9.80665)+4/(2*9.80665));assert(p.npsh.adequate);assert(!p.npsh.flowMismatch);
+s.staticCheck.minimumGauge=110;p=L.pressureChecks(s,r);assert(!p.static.adequate);s.npshCheck.required=50;p=L.pressureChecks(s,r);assert(!p.npsh.adequate);s.npshCheck.flow=.1;assert(L.pressureChecks(s,r).npsh.flowMismatch);s.npshCheck.suctionGauge=-102;assert(L.pressureChecks(s,r).npsh.errors.length);s.npshCheck.suctionGauge=50;s.staticCheck.anchorGauge=null;assert(L.pressureChecks(s,r).static.errors.length);
+const hex=x=>Buffer.from(x,'utf16le').swap16().toString('hex').toUpperCase();s.staticCheck.anchorGauge=200;const pdf=L.pdf(s);assert(pdf.includes(hex('静水圧・NPSHの個別確認')));assert(pdf.includes(hex('NPSHa')));assert(L.pressureSummary(s,r).some(x=>x.includes('入力目標未満')));const legacy=structuredClone(L.defaults);assert.equal(L.pressureChecks(legacy,L.calculate(legacy)).static,null);assert.equal(L.pressureChecks(legacy,L.calculate(legacy)).npsh,null);
+// Official IAPWS-IF97 R7-97(2012) Table 35, pressures in kPa.
+for(const [kelvin,expected,tol] of [[300,3.53658941,1e-7],[500,2638.89776,1e-5],[600,12344.3146,1e-4]]) assert(Math.abs(L.waterSaturationPressure(kelvin-273.15)-expected)<tol);
+assert.equal(L.waterSaturationPressure(-0.01),null);assert.equal(L.waterSaturationPressure(374),null);
+const u=structuredClone(s);u.npshCheck={flow:.2,temperature:20,atmosphere:101.325,vapour:99,suctionGauge:50,velocity:2,required:3,margin:1,vapourMode:'water-if97',reference:'水'};let q=L.pressureChecks(u,r).npsh;assert.deepEqual(q.errors,[]);assert(Math.abs(q.vapour-2.33921477)<1e-6);assert(q.adequate);const v20=q.vapour;u.npshCheck.temperature=80;q=L.pressureChecks(u,r).npsh;assert(q.vapour>v20);assert(q.available<L.pressureChecks({...u,npshCheck:{...u.npshCheck,temperature:20}},r).npsh.available);assert(L.pressureSummary(u,r).some(x=>x.includes('IAPWS-IF97')));
+u.npshCheck.temperature=101;assert(L.pressureChecks(u,r).npsh.errors.length);u.npshCheck.temperature=80;u.npshCheck.suctionGauge=-60;u.npshCheck.velocity=10;u.npshCheck.required=0;u.npshCheck.margin=0;q=L.pressureChecks(u,r).npsh;assert(q.available>0);assert(q.phaseUnsafe);assert(!q.adequate);assert(L.pressureSummary(u,r).some(x=>x.includes('単相液体の前提')));assert(L.warnings(u,r).some(x=>x.text.includes('蒸気圧以下')));
+u.npshCheck.vapourMode='manual';u.npshCheck.vapour=2.339;u.npshCheck.suctionGauge=50;q=L.pressureChecks(u,r).npsh;assert.equal(q.vapour,2.339);assert(!q.phaseUnsafe);u.npshCheck.vapourMode='invalid';assert(L.pressureChecks(u,r).npsh.errors.length);
+console.log('static pressure, operating NPSH, reference cases, invalid input and PDF: OK');

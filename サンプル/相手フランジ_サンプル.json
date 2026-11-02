@@ -1,0 +1,51 @@
+{
+  "format": "piping-design-notebook",
+  "version": 4,
+  "data": {
+    "maxVelocity": 2,
+    "density": 998.2,
+    "viscosity": 1.004,
+    "roughness": 0.045,
+    "efficiency": 70,
+    "margin": 10,
+    "sourceZ": 0,
+    "sourcePressure": 0,
+    "origin": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "routes": [
+      {
+        "id": 1,
+        "parent": 0,
+        "direction": "east",
+        "len": 4,
+        "pipe": "100A",
+        "parts": [
+          {
+            "type": "gate",
+            "catalog": "kitz_10fcl_100",
+            "position": 50,
+            "count": 1,
+            "k": 0.2,
+            "kRef": "",
+            "stemDirection": "up",
+            "mating": "jis10k_sop_ff",
+            "gasketThickness": 3
+          }
+        ]
+      }
+    ],
+    "equipment": [
+      {
+        "id": 1,
+        "name": "設備 1",
+        "node": 1,
+        "flow": 0.1,
+        "pressure": 0
+      }
+    ],
+    "joints": {}
+  }
+}

@@ -1,0 +1,9 @@
+const assert=require('node:assert/strict'),C=require('./core'),N=require('./network'),K=require('./components');
+const vectors={east:[1,0,0],west:[-1,0,0],north:[0,1,0],south:[0,-1,0],up:[0,0,1],down:[0,0,-1]};
+for(const [dir,v] of Object.entries(vectors))for(const [stem,w] of Object.entries(vectors)){
+ let s=structuredClone(N.defaults);s.valveDrawingStyle='reference';s.routes=[{id:1,parent:0,direction:dir,len:2,pipe:'100A',parts:[{type:'gate',catalog:'kitz_10fcl_100',stemDirection:stem,position:50,count:1,k:.2}]}];s.equipment=[{id:1,name:'設備',node:1,flow:.1,pressure:0}];const r=N.calculate(s),errors=N.drawingErrors(s,r),parallel=v.some((x,i)=>x!==0&&w[i]!==0);
+ if(parallel){assert(errors.some(e=>e.includes('弁棒方向')));continue}assert.deepEqual(errors,[]);
+ for(const view of ['top','front','side','iso']){let scene=N.drawing(s,view,r),ref=scene.filter(x=>x.kind==='line'&&x.layer==='VALVE_REFERENCE');assert(ref.length>0);let mid=r.points.get(1),origin={x:mid.x/2,y:mid.y/2,z:mid.z/2},tip={x:origin.x+w[0]*.548,y:origin.y+w[1]*.548,z:origin.z+w[2]*.548},a=C.project(origin,view).map(x=>x*1000),b=C.project(tip,view).map(x=>x*1000);if(Math.hypot(a[0]-b[0],a[1]-b[1])>1e-6)assert(ref.some(l=>Math.hypot(l.a[0]-a[0],l.a[1]-a[1])<1e-6&&Math.hypot(l.b[0]-b[0],l.b[1]-b[1])<1e-6));let box=N.drawingBounds(scene);for(const l of ref)for(const p of [l.a,l.b])assert(p[0]>=box.minX-1e-6&&p[0]<=box.minX+box.width+1e-6&&p[1]>=box.minY-1e-6&&p[1]<=box.minY+box.height+1e-6);assert(scene.some(x=>x.kind==='label'&&x.text.includes('WHEEL LOCATION UNKNOWN')))}
+}
+assert.equal(K.stemDirection({direction:'up'},{}),'north');assert.equal(K.stemDirection({direction:'east'},{}),'up');assert.equal(K.stemDirection({direction:'east'},{stemDirection:'__proto__'}),null);
+console.log('弁棒方向、H参考枠の投影・境界、旧データ初期値: OK');

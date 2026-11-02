@@ -1,0 +1,8 @@
+{
+  "name": "piping-design-notebook",
+  "version": "0.1.0",
+  "private": true,
+  "description": "水配管の概算と検討用配管図を作成するブラウザーアプリ",
+  "scripts": { "test": "node --test" },
+  "engines": { "node": ">=22" }
+}
