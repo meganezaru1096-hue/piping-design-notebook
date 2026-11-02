@@ -6,7 +6,7 @@
 
 ## 起動方法
 
-公開ページが利用できる場合は、リポジトリの **Settings → Pages** に表示されるページURLをEdgeまたはChromeで開きます。
+**[配管設計ノートを開く](https://meganezaru1096-hue.github.io/piping-design-notebook/)** をEdgeまたはChromeで開きます。会社で利用する場合は、このURLを共有してください。
 
 ファイルを手元で使用する場合は、このリポジトリをZIPでダウンロード・展開し、`index.html` をEdgeまたはChromeで開きます。追加インストールは不要です。HTMLと同じフォルダーにあるJavaScript・CSSファイルを移動しないでください。画面上部から「開放系」と「密閉循環・冷却水」を切り替えられます。
 
