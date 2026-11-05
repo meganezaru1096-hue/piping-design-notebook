@@ -1,0 +1,7 @@
+'use strict';
+const assert=require('node:assert/strict'),H=require('./return-route'),L=require('./circulation'),N=require('./network');
+let s=structuredClone(L.defaults);s.supply.routes[1]={id:2,parent:1,direction:'diagonal',dx:3,dy:4,dz:0,len:5,pipe:'65A',parts:[{type:'gate',position:50,count:1,k:.2}]};
+assert.deepEqual(H.relativeOrigin(s,2,{x:1,y:-2,z:3}),{x:10,y:2,z:3});
+assert.throws(()=>H.relativeOrigin(s,99,{x:0,y:0,z:0}),/未確定/);assert.throws(()=>H.relativeOrigin(s,0,{x:NaN,y:0,z:0}),/数値/);
+s.return.origin=H.relativeOrigin(s,0,{x:0,y:-1,z:0});let c=H.copySupply(s);assert.deepEqual(c.equipment.map(e=>e.returnNode),s.equipment.map(e=>e.supplyNode));assert.equal(c.branch.routes[1].direction,'diagonal');assert.deepEqual(c.branch.routes[1].parts,[]);s.return=c.branch;s.equipment=c.equipment;const result=L.calculate(s);assert.deepEqual(result.errors,[]);for(const [id,p] of result.a.points){const q=result.b.points.get(id);assert.equal(q.x,p.x);assert.equal(q.y,p.y-1);assert.equal(q.z,p.z)}assert.deepEqual(L.equipmentPath(s,result,1).back.map(e=>e.id),[2,1]);
+s.commonDevices=[{side:'return'}];assert.throws(()=>H.copySupply(s),/共通機器/);s.commonDevices=[];s.equipment[0].balanceValve={side:'return'};assert.throws(()=>H.copySupply(s),/調整弁/);s.equipment[0].balanceValve=null;s.supply.routes[0].len=0;assert.throws(()=>H.copySupply(s),/全区間/);console.log('relative return origin and reverse-flow branched copy: OK');

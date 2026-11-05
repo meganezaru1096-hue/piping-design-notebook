@@ -1,0 +1,110 @@
+{
+  "format": "piping-closed-circulation",
+  "version": 1,
+  "data": {
+    "maxVelocity": 2,
+    "density": 998.2,
+    "viscosity": 1.004,
+    "roughness": 0.045,
+    "efficiency": 70,
+    "margin": 10,
+    "commonPressureDrop": 20,
+    "commonDevices": [],
+    "insulationThickness": 0,
+    "minimumClearance": 0,
+    "supply": {
+      "origin": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "routes": [
+        {
+          "id": 1,
+          "parent": 0,
+          "direction": "east",
+          "len": 6,
+          "pipe": "100A",
+          "parts": []
+        },
+        {
+          "id": 2,
+          "parent": 1,
+          "direction": "diagonal",
+          "dx": 3,
+          "dy": 4,
+          "dz": 0,
+          "len": 5,
+          "pipe": "65A",
+          "parts": []
+        },
+        {
+          "id": 3,
+          "parent": 1,
+          "direction": "north",
+          "len": 4,
+          "pipe": "50A",
+          "parts": []
+        }
+      ],
+      "joints": {}
+    },
+    "return": {
+      "origin": {
+        "x": 0,
+        "y": -1,
+        "z": -1
+      },
+      "routes": [
+        {
+          "id": 1,
+          "parent": 0,
+          "direction": "east",
+          "len": 6,
+          "pipe": "100A",
+          "parts": []
+        },
+        {
+          "id": 2,
+          "parent": 1,
+          "direction": "diagonal",
+          "len": 5,
+          "pipe": "65A",
+          "parts": [],
+          "dx": 3,
+          "dy": 4,
+          "dz": 0
+        },
+        {
+          "id": 3,
+          "parent": 1,
+          "direction": "north",
+          "len": 4,
+          "pipe": "50A",
+          "parts": []
+        }
+      ],
+      "joints": {}
+    },
+    "equipment": [
+      {
+        "id": 1,
+        "name": "設備 A",
+        "supplyNode": 2,
+        "returnNode": 2,
+        "flow": 0.12,
+        "pressureDrop": 30,
+        "pressureDropBasis": "total"
+      },
+      {
+        "id": 2,
+        "name": "設備 B",
+        "supplyNode": 3,
+        "returnNode": 3,
+        "flow": 0.08,
+        "pressureDrop": 45,
+        "pressureDropBasis": "total"
+      }
+    ]
+  }
+}
